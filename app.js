@@ -80,12 +80,5 @@ io.sockets.on('connection', function(socket) {
 	if(all_d.length>0) {
 		socket.emit('history', all_d);
 	}
-	socket.on( 'reqint', function(d) {
-		if(!isNaN(d)) {
-			interval=d;
-			console.log('setting update interval to %d.', d);
-		}
-		socket.broadcast.emit('setint', d);
-	});
 });
 
