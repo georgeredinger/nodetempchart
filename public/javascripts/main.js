@@ -36,7 +36,7 @@ function re_flot() {
 		d1=d1.slice(0-limit);
 	}
 	d1_len=d1.length;
-	var tick_int=Math.round((d1[d1_len-1][0]-d1[0][0])/60000);;
+	var tick_int=Math.round((d1[d1_len-1][0]-d1[0][0])/6000);
 	var d=[
 		{ data: d1, label:'last temperature: '},
 	];
@@ -44,7 +44,7 @@ function re_flot() {
 		$('#testflot'), 
 		d,
 		{
-			xaxis:{mode:'time', timeFormat:'%h:%M', tickSize:[tick_int, "minute"]},
+			xaxis:{mode:'time', timeFormat:'%d %h:%M', tickSize:[tick_int, "second"]},
 			legend: { container: $('#legend') }
 		}
 	);
