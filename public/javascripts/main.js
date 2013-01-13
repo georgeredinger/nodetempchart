@@ -45,6 +45,7 @@ function re_flot() {
 		d,
 		{
 			xaxis:{mode:'time', timeFormat:'%d %h:%M', tickSize:[tick_int, "second"]},
+			yaxis: {min:-12, max: 102,  tickSize: 5}, 
 			legend: { container: $('#legend') }
 		}
 	);
