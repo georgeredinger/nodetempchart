@@ -1,8 +1,9 @@
-var socket=io.connect(), d1=[],  zone_delta=(new Date()).getTimezoneOffset()*60000;	// time diff in ms
-var limit=86400; 
+var socket=io.connect(), d1=[], batt=[], zone_delta=(new Date()).getTimezoneOffset()*60000;	// time diff in ms
+var limit=50000; 
 socket.on('newdata', function(v) {
 	var ts=v[0]-zone_delta;
 	d1.push([ts, v[1]]);	
+	batt.push([ts, v[2]]);	
 	re_flot();	
 	var i=1;
 	$('#legend').find('tr').each(function() {
@@ -13,6 +14,7 @@ socket.on('history', function(a) {
 	for(var i=0, l=a.length;i<l;i++) {
 		var v=a[i],  ts=v[0]-zone_delta;
 		d1.push([ts, v[1]]);	
+		batt.push([ts, v[2]]);	
 	}
 	re_flot();
 });
@@ -36,16 +38,19 @@ function re_flot() {
 		d1=d1.slice(0-limit);
 	}
 	d1_len=d1.length;
-	var tick_int=Math.round((d1[d1_len-1][0]-d1[0][0])/6000);
+	var tick_int=Math.round((d1[d1_len-1][0]-d1[0][0])/(600));
+	console.log('tick_int:'+tick_int);
 	var d=[
 		{ data: d1, label:'last temperature: '},
+		{ data: batt, label:'batt mv*200: '},
 	];
 	$.plot(
 		$('#testflot'), 
 		d,
 		{
-			xaxis:{mode:'time', timeFormat:'%d %h:%M', tickSize:[tick_int, "second"]},
-			yaxis: {min:-12, max: 102,  tickSize: 5}, 
+			//xaxis:{mode:'time', timeFormat:'%h:%M', tickSize:[tick_int, "second"]},
+			xaxis:{mode:'time', timeFormat:'%h', tickSize:[1, "hour"]},
+			yaxis: {min:-12, max: 102,  tickSize: 10}, 
 			legend: { container: $('#legend') }
 		}
 	);

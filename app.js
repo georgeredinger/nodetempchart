@@ -36,7 +36,7 @@ var sp = new SerialPort("/dev/ttyUSB0", {
 });
 
 sp.on('data', function (data) {
-	var words,hi,lo,temp;
+	var words,hi,lo,temp,batt;
 	var data_arr;
 	var ts=(new Date()).getTime();
 	words = data.split(' ');
@@ -48,7 +48,11 @@ sp.on('data', function (data) {
      temp = temp - 65536.0;  
 		}
     temp = (temp/10.0)*1.8+32.0 
-    data_arr=[ts,temp];
+		lo = parseInt(words[6]);
+		hi = parseInt(words[7]);
+	  batt = (hi*256+lo)/50.0;	
+    data_arr=[ts,temp,batt];
+		console.log(data_arr);
 		all_d.push(data_arr)
 		io.sockets.emit('newdata', data_arr);
 	}
