@@ -41,8 +41,8 @@ function re_flot() {
 	var tick_int=Math.round((d1[d1_len-1][0]-d1[0][0])/(600));
 	console.log('tick_int:'+tick_int);
 	var d=[
-		{ data: d1, label:'last temperature: '},
-		{ data: batt, label:'batt mv*200: '},
+		{ data: d1, label:'Temperature (F): '},
+		{ data: batt, label:'batt (volts) : ',yaxis:2},
 	];
 	$.plot(
 		$('#testflot'), 
@@ -50,7 +50,9 @@ function re_flot() {
 		{
 			//xaxis:{mode:'time', timeFormat:'%h:%M', tickSize:[tick_int, "second"]},
 			xaxis:{mode:'time', timeFormat:'%h', tickSize:[1, "hour"]},
-			yaxis: {min:-12, max: 102,  tickSize: 10}, 
+			// outside yaxis: {min:-12, max: 102,  tickSize: 10}, 
+			yaxis: {min:55, max: 85,  tickSize: 2}, //inside
+			y2axis: {min:3.3, max: 4.3,  tickSize: 0.1}, 
 			legend: { container: $('#legend') }
 		}
 	);

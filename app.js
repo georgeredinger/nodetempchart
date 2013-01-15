@@ -41,16 +41,16 @@ sp.on('data', function (data) {
 	var ts=(new Date()).getTime();
 	words = data.split(' ');
 	if(words[0] == 'OK'){
-    lo = parseInt(words[4]);
-		hi = parseInt(words[5]);
+    lo = parseInt(words[2]);
+		hi = parseInt(words[3]);
 		temp = hi*256.0+lo;
 		if(temp > 32767.0){
      temp = temp - 65536.0;  
 		}
-    temp = (temp/10.0)*1.8+32.0 
-		lo = parseInt(words[6]);
-		hi = parseInt(words[7]);
-	  batt = (hi*256+lo)/50.0;	
+    temp = (temp/100.0)*1.8+32.0 
+		lo = parseInt(words[4]);
+		hi = parseInt(words[5]);
+	  batt = (hi*256+lo)/1000.0;	
     data_arr=[ts,temp,batt];
 		console.log(data_arr);
 		all_d.push(data_arr)
