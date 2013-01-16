@@ -72,7 +72,7 @@ sp.on("open", function () {
 
 // Routes
 
-app.get('/', routes.index);
+app.get('/', routes.flot);
 app.get('/flot', routes.flot);
 
 var io=require('socket.io').listen(app);

@@ -4,6 +4,8 @@
   , "private": true
   , "dependencies": {
       "express": "2.5.5"
+      ,"serialport": ">=0"
+      ,"socket.io": ">=0"
     , "jade": ">= 0.0.1"
   }
 }

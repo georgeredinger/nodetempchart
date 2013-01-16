@@ -1,5 +1,10 @@
 var socket=io.connect(), d1=[], batt=[], zone_delta=(new Date()).getTimezoneOffset()*60000;	// time diff in ms
-var limit=50000; 
+var limit=50000;
+function zeroPad(num, places) {
+    var zero = places - num.toString().length + 1;
+      return Array(+(zero > 0 && zero)).join("0") + num;
+}
+
 socket.on('newdata', function(v) {
 	var ts=v[0]-zone_delta;
 	var box = '<td class="legendColorBox"><div style="border:1px solid  white ;padding:1px><div style="width:4px;height:0;border:5px solid  black;overflow:hidden"></div></div></td>'
@@ -14,7 +19,7 @@ socket.on('newdata', function(v) {
 	});
  d.getHours();
  d.getMinutes();
-	$('#legend').find('table').append('<tr>'+box+'<td>Last Sample at:</td> <td>'+d.getHours()+':'+d.getMinutes()+'</td></tr>');
+	$('#legend').find('table').append('<tr>'+box+'<td>Last Sample at:</td> <td>'+d.getHours()+':'+zeroPad(d.getMinutes(),2)+'</td></tr>');
 });
 
 
