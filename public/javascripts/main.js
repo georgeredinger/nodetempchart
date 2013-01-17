@@ -63,9 +63,10 @@ function re_flot() {
 		d,
 		{
 			//xaxis:{mode:'time', timeFormat:'%h:%M', tickSize:[tick_int, "second"]},
-			xaxis:{mode:'time', timeFormat:'%h', tickSize:[1, "hour"]},
+			xaxis:{mode:'time', timeFormat:'%H', tickSize:[1, "hour"]},
 			// outside yaxis: {min:-12, max: 102,  tickSize: 10}, 
-			yaxis: {min:0, max: 100,  tickSize: 5}, //inside
+      grid: { hoverable: true, clickable: true },
+			yaxis: {min:0, max: 100,  tickSize: 5,hoverable: true, clickable: true}, //inside
 			y2axis: {min:3.4, max: 4.2,  tickSize: 0.1}, 
 			legend: { container: $('#legend') }
 		}
