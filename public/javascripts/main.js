@@ -66,6 +66,11 @@ function re_flot() {
 			xaxis:{mode:'time', timeFormat:'%H', tickSize:[1, "hour"]},
 			// outside yaxis: {min:-12, max: 102,  tickSize: 10}, 
       grid: { hoverable: true, clickable: true },
+      tooltip: true,
+      tooltipOpts: {
+        content: "%s for %x was %y.2",
+        dateFormat: "%y-%0m-%0d",
+        },
 			yaxis: {min:0, max: 100,  tickSize: 5,hoverable: true, clickable: true}, //inside
 			y2axis: {min:3.4, max: 4.2,  tickSize: 0.1}, 
 			legend: { container: $('#legend') }
